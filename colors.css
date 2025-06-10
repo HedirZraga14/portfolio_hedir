@@ -1,0 +1,70 @@
+/** Background Color **/
+.bg-color,
+.services-boxy ul > li:before,
+.theme-btn,
+.service:hover > i,
+.service.active > i,
+.our-work-info > ul li:first-child > a,
+.my-skills > .progress > .progress-bar,
+.slick-slide.slick-active.slick-center > .history-btn > h5:before,
+.subscribe-us > form > input[type="submit"],
+.main-footer > span,
+.pagination li.active a, .pagination li a:hover,
+.social-buttons > li > a:hover,
+.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar,
+.fancy-menu > ul > li > a::after,
+.my-work-sec > .project-list > button:hover,
+.view-location:hover,
+.hide-location,
+
+
+.widget_search > form input[type="submit"],
+#calendar_wrap > table > tbody > tr > td > a,
+.form-submit > input[type="submit"],
+.subscribe-us input[type="submit"],
+.searchform > div > input[type="submit"]
+{
+    background-color: #ff3740;
+}
+
+
+/** Background Color **/
+.text-color,
+header nav > ul > li > a > i,
+.service > i,
+.about-text-block > h3 span,
+.heading2 > span,
+.my-education-sec li span,
+.history-info > span,
+.slick-slide.slick-active.slick-center > .history-btn > span,
+.testimonial-title > span,
+.blog-info > a,
+.blog-info > p  a,
+.resume-header > .logo a > span,
+.info-title > span,
+.contact-info-list > ul > li i,
+.view-location > i,
+.bottom-line a,
+.breadcrumbs > li:last-child a,
+blockquote span a,
+.post-tags > span i,
+.my-name-who > h5,
+.our-work-info > h3:hover > a,
+.blog-info > h2:hover,
+
+
+.widget_rss > ul li cite,
+.comment-author > cite > a,
+.single-cat > a:hover,
+th a,
+blockquote cite a,
+.error-not-found h3   
+{
+    color: #ff3740;
+}
+
+/** Background Color **/
+.sd
+{
+    border-color: #ff3740;
+}
