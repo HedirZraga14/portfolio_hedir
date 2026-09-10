@@ -1,21 +1,67 @@
-const animatedElements = document.querySelectorAll('.animate-fade-in');
+const revealElement = (el) => {
+    if (!el.classList.contains('visible')) {
+        el.classList.add('visible');
+    }
+};
 
-if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.12,
-        rootMargin: '0px 0px -60px 0px'
+const isInViewport = (el, offset = 0) => {
+    const rect = el.getBoundingClientRect();
+    return (
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) - offset &&
+        rect.bottom >= 0
+    );
+};
+
+const initAnimations = () => {
+    const animatedElements = document.querySelectorAll('.animate-fade-in');
+
+    animatedElements.forEach((el) => {
+        if (isInViewport(el, -20)) {
+            revealElement(el);
+        }
     });
 
-    animatedElements.forEach((element) => observer.observe(element));
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    revealElement(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: [0, 0.05, 0.1],
+            rootMargin: '0px 0px 0px 0px'
+        });
+
+        animatedElements.forEach((element) => {
+            if (!element.classList.contains('visible')) {
+                observer.observe(element);
+            }
+        });
+    } else {
+        animatedElements.forEach(revealElement);
+    }
+
+    const safetyTimeout = setTimeout(() => {
+        document.querySelectorAll('.animate-fade-in:not(.visible)').forEach(revealElement);
+    }, 900);
+
+    window.addEventListener('load', () => {
+        document.querySelectorAll('.animate-fade-in').forEach((el) => {
+            if (isInViewport(el, 0)) revealElement(el);
+        });
+        clearTimeout(safetyTimeout);
+        setTimeout(() => {
+            document.querySelectorAll('.animate-fade-in:not(.visible)').forEach(revealElement);
+        }, 300);
+    }, { once: true });
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAnimations);
 } else {
-    animatedElements.forEach((element) => element.classList.add('visible'));
+    initAnimations();
 }
 
 document.querySelectorAll('nav a[href^="#"]').forEach((anchor) => {
